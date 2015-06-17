@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="alwaysUseFullPath" value="true"/>
+		<property name="mappings">
+			<props>
+				<prop key="/home.do">HomeControllerBean</prop>
+				<prop key="/logIn.do">LogInControllerBean</prop>
+				<prop key="/searchVideos.do">SearchVideosControllerBean</prop>
+				<prop key="/rentAVideo.do">RentAVideoControllerBean</prop>
+				<prop key="/maintainVideos.do">MaintainVideosControllerBean</prop>
+				<prop key="/maintainCustomers.do">MaintainCustomersControllerBean</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="HomeControllerBean" class="com.busterblocks.controller.HomeController">
+		<property name="viewName" value="home"/>
+	</bean>
+
+	<bean id="LogInControllerBean" class="com.busterblocks.controller.LogInController">
+		<property name="viewName" value="logIn"/>
+	</bean>
+
+	<bean id="SearchVideosControllerBean" class="com.busterblocks.controller.SearchVideosController">
+		<property name="videoSearchClient" ref="videoSearchClient"/>
+		<property name="viewName" value="searchVideos"/>
+	</bean>
+
+	<bean id="RentAVideoControllerBean" class="com.busterblocks.controller.RentAVideoController">
+		<property name="rentAVideoClient" ref="rentAVideoClient"/>
+		<property name="returnAVideoClient" ref="returnAVideoClient"/>
+		<property name="viewName" value="rentAVideo"/>
+	</bean>
+
+	<bean id="MaintainVideosControllerBean" class="com.busterblocks.controller.MaintainVideosController">
+		<property name="viewName" value="maintainVideos"/>
+	</bean>
+
+	<bean id="MaintainCustomersControllerBean" class="com.busterblocks.controller.MaintainCustomersController">
+		<property name="maintainCustomerClient" ref="maintainCustomerClient"/>
+		<property name="viewName" value="maintainCustomers"/>
+	</bean>
+
+</beans>

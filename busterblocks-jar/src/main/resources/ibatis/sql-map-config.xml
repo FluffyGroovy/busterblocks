@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings useStatementNamespaces="true"/>
+	<typeAlias alias="OracleDateHandler" type="com.busterblocks.util.CustomDateHandler"/>
+	<typeHandler callback="OracleDateHandler" jdbcType="DATETIME" javaType="date"/>
+
+	<sqlMap resource="ibatis/HR_GENERIC_SEQUENCE_SqlMap.xml"/>
+
+	<!-- Video -->
+	<sqlMap resource="ibatis/HR_GENRE_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_ACTOR_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_VIDEO_STATUS_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_MOVIE_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_MOVIE_ACTOR_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_VIDEO_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_VIDEO_ITEM_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_VIDEO_VIEW_SqlMap.xml"/>
+
+	<!-- Customer -->
+	<sqlMap resource="ibatis/HR_CUSTOMER_SqlMap.xml"/>
+
+	<!-- Rental -->
+	<sqlMap resource="ibatis/HR_VIDEO_RENTAL_SqlMap.xml"/>
+	<sqlMap resource="ibatis/HR_LAST_VIDEO_RENTAL_VIEW_SqlMap.xml"/>
+
+</sqlMapConfig>

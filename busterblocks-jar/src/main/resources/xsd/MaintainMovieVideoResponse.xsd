@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:tns="http://schemas.busterblocks.com/store"
+		   targetNamespace="http://schemas.busterblocks.com/store"
+		   elementFormDefault="qualified" version="1.00">
+
+	<xs:include schemaLocation="BusterblocksTypes.xsd"/>
+
+	<xs:element name="MaintainMovieVideoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Video" type="tns:ServiceVideo" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:group ref="tns:Result"/>
+			</xs:sequence>
+			<xs:attribute name="schemaVersion" type="tns:schemaVersion" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

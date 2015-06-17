@@ -1,0 +1,80 @@
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:com/busterblocks/dataSource.xml"/>
+
+	<!-- gateway -->
+    <bean id="videoComponent" class="com.busterblocks.video.gateway.VideoComponent">
+        <property name="movieDaoManager" ref="movieDaoManager"/>
+        <property name="videoItemDaoManager" ref="videoItemDaoManager"/>
+    </bean>
+    <bean id="customerComponent" class="com.busterblocks.customer.gateway.CustomerComponent">
+        <property name="customerDaoManager" ref="customerDaoManager"/>
+    </bean>
+    <bean id="videoRentalComponent" class="com.busterblocks.rental.gateway.VideoRentalComponent">
+        <property name="videoRentalDaoManager" ref="videoRentalDaoManager"/>
+        <property name="lastVideoRentalDaoManager" ref="lastVideoRentalDaoManager"/>
+    </bean>
+
+    <!-- persistence.manager -->
+    <bean id="movieDaoManager" class="com.busterblocks.video.persistence.manager.MovieDaoManager">
+        <property name="movieDtoDaoManager" ref="movieDtoDaoManager"/>
+    </bean>
+    <bean id="videoItemDaoManager" class="com.busterblocks.video.persistence.manager.VideoItemDaoManager">
+        <property name="videoItemDtoDaoManager" ref="videoItemDtoDaoManager"/>
+    </bean>
+    <bean id="customerDaoManager" class="com.busterblocks.customer.persistence.manager.CustomerDaoManager">
+        <property name="customerDtoDaoManager" ref="customerDtoDaoManager"/>
+    </bean>
+    <bean id="videoRentalDaoManager" class="com.busterblocks.rental.persistence.manager.VideoRentalDaoManager">
+        <property name="videoRentalDtoDaoManager" ref="videoRentalDtoDaoManager"/>
+    </bean>
+    <bean id="lastVideoRentalDaoManager" class="com.busterblocks.rental.persistence.manager.LastVideoRentalDaoManager">
+        <property name="lastVideoRentalDtoDaoManager" ref="lastVideoRentalDtoDaoManager"/>
+    </bean>
+
+    <!-- persistence.table.manager -->
+    <bean id="movieDtoDaoManager" class="com.busterblocks.video.persistence.table.manager.MovieDtoDaoManager">
+		<property name="videoViewDtoDAO" ref="videoViewDtoDAO"/>
+		<property name="videoRentalComponent" ref="videoRentalComponent"/>
+    </bean>
+    <bean id="videoItemDtoDaoManager" class="com.busterblocks.video.persistence.table.manager.VideoItemDtoDaoManager">
+		<property name="videoItemDtoDAO" ref="videoItemDtoDAO"/>
+    </bean>
+    <bean id="customerDtoDaoManager" class="com.busterblocks.customer.persistence.table.manager.CustomerDtoDaoManager">
+		<property name="customerDtoDAO" ref="customerDtoDAO"/>
+		<property name="genericSequenceDtoDaoManager" ref="genericSequenceDtoDaoManager"/>
+    </bean>
+    <bean id="videoRentalDtoDaoManager" class="com.busterblocks.rental.persistence.table.manager.VideoRentalDtoDaoManager">
+		<property name="videoRentalDtoDAO" ref="videoRentalDtoDAO"/>
+		<property name="lastVideoRentalDtoDaoManager" ref="lastVideoRentalDtoDaoManager"/>
+		<property name="genericSequenceDtoDaoManager" ref="genericSequenceDtoDaoManager"/>
+		<property name="videoComponent" ref="videoComponent"/>
+    </bean>
+    <bean id="lastVideoRentalDtoDaoManager" class="com.busterblocks.rental.persistence.table.manager.LastVideoRentalDtoDaoManager">
+		<property name="lastVideoRentalViewDtoDAO" ref="lastVideoRentalViewDtoDAO"/>
+    </bean>
+	<bean id="genericSequenceDtoDaoManager" class="com.busterblocks.util.GenericSequenceDtoDaoManager">
+		<property name="sqlMapClient" ref="SqlMapClientBean.Generic"/>
+	</bean>
+
+    <!-- persistence.table.dao -->
+    <bean id="videoItemDtoDAO" class="com.busterblocks.video.persistence.table.dao.VideoItemDtoDAOImpl">
+		<property name="sqlMapClient" ref="SqlMapClientBean.Generic"/>
+    </bean>
+    <bean id="videoViewDtoDAO" class="com.busterblocks.video.persistence.table.dao.VideoViewDtoDAOImpl">
+		<property name="sqlMapClient" ref="SqlMapClientBean.Generic"/>
+    </bean>
+    <bean id="customerDtoDAO" class="com.busterblocks.customer.persistence.table.dao.CustomerDtoDAOImpl">
+		<property name="sqlMapClient" ref="SqlMapClientBean.Generic"/>
+    </bean>
+    <bean id="videoRentalDtoDAO" class="com.busterblocks.rental.persistence.table.dao.VideoRentalDtoDAOImpl">
+		<property name="sqlMapClient" ref="SqlMapClientBean.Generic"/>
+    </bean>
+    <bean id="lastVideoRentalViewDtoDAO" class="com.busterblocks.rental.persistence.table.dao.LastVideoRentalViewDtoDAOImpl">
+		<property name="sqlMapClient" ref="SqlMapClientBean.Generic"/>
+    </bean>
+
+</beans>

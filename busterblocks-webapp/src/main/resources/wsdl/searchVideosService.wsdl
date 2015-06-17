@@ -1,0 +1,72 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:tns="http://schemas.busterblocks.com/store"
+				  targetNamespace="http://schemas.busterblocks.com/store">
+	<wsdl:types>
+
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+				   elementFormDefault="qualified"
+				   targetNamespace="http://schemas.busterblocks.com/store">
+			<xs:include schemaLocation="BusterblocksTypes.xsd"/>
+		</xs:schema>
+
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+				   elementFormDefault="qualified"
+				   targetNamespace="http://schemas.busterblocks.com/store">
+			<xs:element name="SearchVideosRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MovieName" type="xs:string" minOccurs="0"/>
+						<xs:element name="Genre" type="xs:string" minOccurs="0"/>
+						<xs:element name="ActorName" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="Status" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="schemaVersion" type="tns:schemaVersion" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+				   elementFormDefault="qualified"
+				   targetNamespace="http://schemas.busterblocks.com/store">
+			<xs:element name="SearchVideosResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Video" type="tns:ServiceVideo" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:group ref="tns:Result"/>
+					</xs:sequence>
+					<xs:attribute name="schemaVersion" type="tns:schemaVersion" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="SearchVideosResponse">
+		<wsdl:part element="tns:SearchVideosResponse" name="SearchVideosResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SearchVideosRequest">
+		<wsdl:part element="tns:SearchVideosRequest" name="SearchVideosRequest"/>
+	</wsdl:message>
+	<wsdl:portType name="searchVideosServices">
+		<wsdl:operation name="SearchVideos">
+			<wsdl:input message="tns:SearchVideosRequest" name="SearchVideosRequest"/>
+			<wsdl:output message="tns:SearchVideosResponse" name="SearchVideosResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="searchVideosServicesSoap11" type="tns:searchVideosServices">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="SearchVideos">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="SearchVideosRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SearchVideosResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="searchVideosServicesService">
+		<wsdl:port binding="tns:searchVideosServicesSoap11" name="searchVideosServicesSoap11">
+			<soap:address location="http://localhost:7001/busterblocks/busterblocks-ws/searchVideosService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

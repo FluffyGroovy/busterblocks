@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:oxm="http://www.springframework.org/schema/oxm"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd">
+
+	<import resource="classpath:ibatis/spring-dao-services.xml"/>
+	<import resource="classpath:com/busterblocks/applicationContext.xml"/>
+
+	<bean id="maintainMovieVideoService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="XSDBean.maintainMovieVideoService"/>
+		<property name="portTypeName" value="maintainMovieVideoService"/>
+		<property name="locationUri" value="/busterblocks-ws/maintainMovieVideoService"/>
+	</bean>
+
+	<bean id="maintainVideoService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="XSDBean.maintainVideoService"/>
+		<property name="portTypeName" value="maintainVideoService"/>
+		<property name="locationUri" value="/busterblocks-ws/maintainVideoService"/>
+	</bean>
+
+	<bean id="maintainVideoItemService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="XSDBean.maintainVideoItemService"/>
+		<property name="portTypeName" value="maintainVideoItemService"/>
+		<property name="locationUri" value="/busterblocks-ws/maintainVideoItemService"/>
+	</bean>
+
+	<bean id="maintainCustomerService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="XSDBean.maintainCustomerService"/>
+		<property name="portTypeName" value="maintainCustomerService"/>
+		<property name="locationUri" value="/busterblocks-ws/maintainCustomerService"/>
+	</bean>
+
+	<bean id="searchVideosService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="XSDBean.searchVideosService"/>
+		<property name="portTypeName" value="searchVideosService"/>
+		<property name="locationUri" value="/busterblocks-ws/searchVideosService"/>
+	</bean>
+
+	<bean id="rentAVideoService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="XSDBean.rentAVideoService"/>
+		<property name="portTypeName" value="rentAVideoService"/>
+		<property name="locationUri" value="/busterblocks-ws/rentAVideoService"/>
+	</bean>
+
+	<bean id="returnAVideoService" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="XSDBean.returnAVideoService"/>
+		<property name="portTypeName" value="returnAVideoService"/>
+		<property name="locationUri" value="/busterblocks-ws/returnAVideoService"/>
+	</bean>
+
+	<bean id="XSDBean.maintainMovieVideoService" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+		<property name="xsds">
+			<list>
+				<value>classpath:xsd/MaintainMovieVideoRequest.xsd</value>
+				<value>classpath:xsd/MaintainMovieVideoResponse.xsd</value>
+			</list>
+		</property>
+		<property name="inline" value="true"/>
+	</bean>
+
+	<bean id="XSDBean.maintainVideoService" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+		<property name="xsds">
+			<list>
+				<value>classpath:xsd/MaintainMovieVideoRequest.xsd</value>
+				<value>classpath:xsd/MaintainMovieVideoResponse.xsd</value>
+			</list>
+		</property>
+		<property name="inline" value="true"/>
+	</bean>
+
+	<bean id="XSDBean.maintainVideoItemService" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+		<property name="xsds">
+			<list>
+				<value>classpath:xsd/MaintainVideoItemRequest.xsd</value>
+				<value>classpath:xsd/MaintainVideoItemResponse.xsd</value>
+			</list>
+		</property>
+		<property name="inline" value="true"/>
+	</bean>
+
+	<bean id="XSDBean.maintainCustomerService" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+		<property name="xsds">
+			<list>
+				<value>classpath:xsd/MaintainCustomerRequest.xsd</value>
+				<value>classpath:xsd/MaintainCustomerResponse.xsd</value>
+			</list>
+		</property>
+		<property name="inline" value="true"/>
+	</bean>
+
+	<bean id="XSDBean.searchVideosService" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+		<property name="xsds">
+			<list>
+				<value>classpath:xsd/SearchVideosRequest.xsd</value>
+				<value>classpath:xsd/SearchVideosResponse.xsd</value>
+			</list>
+		</property>
+		<property name="inline" value="true"/>
+	</bean>
+
+	<bean id="XSDBean.rentAVideoService" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+		<property name="xsds">
+			<list>
+				<value>classpath:xsd/RentAVideoRequest.xsd</value>
+				<value>classpath:xsd/RentAVideoResponse.xsd</value>
+			</list>
+		</property>
+		<property name="inline" value="true"/>
+	</bean>
+
+	<bean id="XSDBean.returnAVideoService" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+		<property name="xsds">
+			<list>
+				<value>classpath:xsd/ReturnAVideoRequest.xsd</value>
+				<value>classpath:xsd/ReturnAVideoResponse.xsd</value>
+			</list>
+		</property>
+		<property name="inline" value="true"/>
+	</bean>
+
+	<oxm:jaxb2-marshaller id="busterblocksMarshaller" contextPath="busterblocks.integration.jaxb"/>
+
+	<bean id="EndpointBean.maintainMovieVideoService"
+		  class="com.busterblocks.endpoint.MaintainMovieVideoEndpoint">
+		<constructor-arg ref="busterblocksMarshaller"/>
+	</bean>
+
+	<bean id="EndpointBean.maintainVideoItemService"
+		  class="com.busterblocks.endpoint.MaintainVideoItemEndpoint">
+		<constructor-arg ref="busterblocksMarshaller"/>
+	</bean>
+
+	<bean id="EndpointBean.maintainCustomerItemService"
+		  class="com.busterblocks.endpoint.MaintainCustomerEndpoint">
+		<constructor-arg ref="busterblocksMarshaller"/>
+		<property name="customerComponent" ref="customerComponent"/>
+	</bean>
+
+	<bean id="EndpointBean.searchVideosService"
+		  class="com.busterblocks.endpoint.SearchVideosEndpoint">
+		<constructor-arg ref="busterblocksMarshaller"/>
+		<property name="videoComponent" ref="videoComponent"/>
+	</bean>
+
+	<bean id="EndpointBean.rentAVideoService"
+		  class="com.busterblocks.endpoint.RentAVideoEndpoint">
+		<constructor-arg ref="busterblocksMarshaller"/>
+		<property name="videoRentalComponent" ref="videoRentalComponent"/>
+	</bean>
+
+	<bean id="EndpointBean.returnAVideoService"
+		  class="com.busterblocks.endpoint.ReturnAVideoEndpoint">
+		<constructor-arg ref="busterblocksMarshaller"/>
+		<property name="videoRentalComponent" ref="videoRentalComponent"/>
+	</bean>
+
+	<bean id="endpointMapping" class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://schemas.busterblocks.com/store}MaintainMovieVideoRequest">EndpointBean.maintainMovieVideoService</prop>
+				<prop key="{http://schemas.busterblocks.com/store}MaintainVideoItemRequest">EndpointBean.maintainVideoItemService</prop>
+				<prop key="{http://schemas.busterblocks.com/store}MaintainCustomerRequest">EndpointBean.maintainCustomerItemService</prop>
+				<prop key="{http://schemas.busterblocks.com/store}SearchVideosRequest">EndpointBean.searchVideosService</prop>
+				<prop key="{http://schemas.busterblocks.com/store}RentAVideoRequest">EndpointBean.rentAVideoService</prop>
+				<prop key="{http://schemas.busterblocks.com/store}ReturnAVideoRequest">EndpointBean.returnAVideoService</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

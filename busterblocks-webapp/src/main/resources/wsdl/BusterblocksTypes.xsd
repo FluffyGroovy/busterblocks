@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:tns="http://schemas.busterblocks.com/store"
+		   targetNamespace="http://schemas.busterblocks.com/store"
+		   elementFormDefault="qualified" version="1.00">
+
+	<xs:simpleType name="schemaVersion">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="1.0"/>
+			<xs:maxExclusive value="2.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:group name="Result">
+		<xs:sequence>
+			<xs:element name="ResultCode" type="xs:int"/>
+			<xs:element name="ErrorMessage" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:simpleType name="MaintainCommand">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RETRIEVE"/>
+			<xs:enumeration value="CREATE"/>
+			<xs:enumeration value="UPDATE"/>
+			<xs:enumeration value="DELETE"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="ServiceMovie">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="0"/>
+			<xs:element name="Genre" type="xs:string" minOccurs="0"/>
+			<xs:element name="DurationInMinutes" type="xs:int" minOccurs="0"/>
+			<xs:element name="Actors" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ServiceVideo">
+		<xs:sequence>
+			<xs:element name="Id" type="xs:string" minOccurs="0"/>
+			<xs:element name="Movie" type="tns:ServiceMovie" minOccurs="0"/>
+			<xs:element name="DateReleased" type="xs:string" minOccurs="0"/>
+			<xs:element name="Status" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ServiceVideoItem">
+		<xs:sequence>
+			<xs:element name="Id" type="xs:string" minOccurs="0"/>
+			<xs:element name="SerialNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="Video" type="tns:ServiceVideo" minOccurs="0"/>
+			<xs:element name="Status" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ServiceCustomer">
+		<xs:sequence>
+			<xs:element name="Id" type="xs:string" minOccurs="0"/>
+			<xs:element name="FirstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="Surname" type="xs:string" minOccurs="0"/>
+			<xs:element name="ContactNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="IdNumber" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,53 @@
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller" id="busterblocksClientMarshaller">
+        <property name="contextPath" value="busterblocks.integration.jaxb"/>
+    </bean>
+
+	<!-- service -->
+	<bean class="org.springframework.ws.client.core.WebServiceTemplate" id="searchVideosService">
+		<property name="defaultUri" value="http://localhost:7001/busterblocks/busterblocks-ws/searchVideosService.wsdl"/>
+		<property name="marshaller" ref="busterblocksClientMarshaller"/>
+		<property name="unmarshaller" ref="busterblocksClientMarshaller"/>
+	</bean>
+	<bean class="org.springframework.ws.client.core.WebServiceTemplate" id="maintainCustomerService">
+		<property name="defaultUri" value="http://localhost:7001/busterblocks/busterblocks-ws/maintainCustomerService.wsdl"/>
+		<property name="marshaller" ref="busterblocksClientMarshaller"/>
+		<property name="unmarshaller" ref="busterblocksClientMarshaller"/>
+	</bean>
+	<bean class="org.springframework.ws.client.core.WebServiceTemplate" id="rentAVideoService">
+		<property name="defaultUri" value="http://localhost:7001/busterblocks/busterblocks-ws/rentAVideoService.wsdl"/>
+		<property name="marshaller" ref="busterblocksClientMarshaller"/>
+		<property name="unmarshaller" ref="busterblocksClientMarshaller"/>
+	</bean>
+	<bean class="org.springframework.ws.client.core.WebServiceTemplate" id="returnAVideoService">
+		<property name="defaultUri" value="http://localhost:7001/busterblocks/busterblocks-ws/returnAVideoService.wsdl"/>
+		<property name="marshaller" ref="busterblocksClientMarshaller"/>
+		<property name="unmarshaller" ref="busterblocksClientMarshaller"/>
+	</bean>
+
+	<!-- client -->
+	<bean class="com.busterblocks.client.VideoSearchClient" id="videoSearchClient" scope="session">
+		<aop:scoped-proxy/>
+		<property name="service" ref="searchVideosService"/>
+	</bean>
+	<bean class="com.busterblocks.client.MaintainCustomerClient" id="maintainCustomerClient" scope="session">
+		<aop:scoped-proxy/>
+		<property name="service" ref="maintainCustomerService"/>
+	</bean>
+	<bean class="com.busterblocks.client.RentAVideoClient" id="rentAVideoClient" scope="session">
+		<aop:scoped-proxy/>
+		<property name="service" ref="rentAVideoService"/>
+	</bean>
+	<bean class="com.busterblocks.client.ReturnAVideoClient" id="returnAVideoClient" scope="session">
+		<aop:scoped-proxy/>
+		<property name="service" ref="returnAVideoService"/>
+	</bean>
+
+</beans>

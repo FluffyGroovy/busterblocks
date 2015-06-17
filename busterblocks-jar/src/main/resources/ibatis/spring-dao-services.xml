@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+     <bean id="DataSourceBean.Busterblocks" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="HR"/>
+        <property name="lookupOnStartup" value="false"/>
+        <property name="proxyInterface" value="javax.sql.DataSource"/>
+    </bean>
+
+    <bean id="ClasspathResourceBean.Busterblocks"
+          class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg type="java.lang.String" value="/ibatis/sql-map-config.xml"/>
+    </bean>
+
+    <bean id="SqlMapClientBean.Generic" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="dataSource" ref="DataSourceBean.Busterblocks"/>
+        <property name="configLocation" ref="ClasspathResourceBean.Busterblocks"/>
+    </bean>
+
+</beans>

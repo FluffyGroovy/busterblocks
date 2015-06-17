@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:tns="http://schemas.busterblocks.com/store"
+		   targetNamespace="http://schemas.busterblocks.com/store"
+		   elementFormDefault="qualified" version="1.00">
+
+	<xs:include schemaLocation="BusterblocksTypes.xsd"/>
+
+	<xs:element name="SearchVideosRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MovieName" type="xs:string" minOccurs="0"/>
+				<xs:element name="Genre" type="xs:string" minOccurs="0"/>
+				<xs:element name="ActorName" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Status" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="schemaVersion" type="tns:schemaVersion" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

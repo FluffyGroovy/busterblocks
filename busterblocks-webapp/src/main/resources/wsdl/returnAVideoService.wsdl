@@ -1,0 +1,69 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:tns="http://schemas.busterblocks.com/store"
+				  targetNamespace="http://schemas.busterblocks.com/store">
+	<wsdl:types>
+
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+				   elementFormDefault="qualified"
+				   targetNamespace="http://schemas.busterblocks.com/store">
+			<xs:include schemaLocation="BusterblocksTypes.xsd"/>
+		</xs:schema>
+
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+				   elementFormDefault="qualified"
+				   targetNamespace="http://schemas.busterblocks.com/store">
+			<xs:element name="ReturnAVideoRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="VideoItemSerialNumber" type="xs:string"/>
+						<xs:element name="Comments" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="schemaVersion" type="tns:schemaVersion" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+				   elementFormDefault="qualified"
+				   targetNamespace="http://schemas.busterblocks.com/store">
+			<xs:element name="ReturnAVideoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="tns:Result"/>
+					</xs:sequence>
+					<xs:attribute name="schemaVersion" type="tns:schemaVersion" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="ReturnAVideoResponse">
+		<wsdl:part element="tns:ReturnAVideoResponse" name="ReturnAVideoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ReturnAVideoRequest">
+		<wsdl:part element="tns:ReturnAVideoRequest" name="ReturnAVideoRequest"/>
+	</wsdl:message>
+	<wsdl:portType name="ReturnAVideoServices">
+		<wsdl:operation name="ReturnAVideo">
+			<wsdl:input message="tns:ReturnAVideoRequest" name="ReturnAVideoRequest"/>
+			<wsdl:output message="tns:ReturnAVideoResponse" name="ReturnAVideoResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ReturnAVideoServicesSoap11" type="tns:ReturnAVideoServices">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ReturnAVideo">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="ReturnAVideoRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ReturnAVideoResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ReturnAVideoServicesService">
+		<wsdl:port binding="tns:ReturnAVideoServicesSoap11" name="ReturnAVideoServicesSoap11">
+			<soap:address location="http://localhost:7001/busterblocks/busterblocks-ws/returnAVideoService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
